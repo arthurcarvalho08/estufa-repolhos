@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Estufa de Repolho</title>
+    <style>
+        :root {
+            --green-primary: #2d5a27;
+            --green-light: #7db146;
+            --bg-color: #b9dbb9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 { color: var(--green-primary); }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            border-bottom: 4px solid var(--green-light);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .greenhouse-visual {
+            font-size: 4rem;
+            margin: 20px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        button {
+            background-color: var(--green-primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover { background-color: var(--green-light); }
+
+        .status-msg {
+            margin-top: 15px;
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🥬 Estufa de Repolho v1.0</h1>
+    
+    <div class="greenhouse-visual" id="cabbage-icon">🌱</div>
+
+    <div class="dashboard">
+        <div class="stat-card">
+            <span class="stat-label">Temperatura</span>
+            <span class="stat-value" id="temp">22°C</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Umidade</span>
+            <span class="stat-value" id="humidity">65%</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Crescimento</span>
+            <span class="stat-value" id="growth">0%</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Saúde</span>
+            <span class="stat-value" id="health">Excelente</span>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button onclick="waterCabbage()">Regar</button>
+        <button onclick="adjustTemp()">Ajustar Clima</button>
+    </div>
+
+    <p class="status-msg" id="msg">Aguardando início do ciclo...</p>
+</div>
+
+<script>
+    let growth = 0;
+    let humidity = 65;
+    let temp = 22;
+
+    function updateDisplay() {
+        document.getElementById('growth').innerText = growth + "%";
+        document.getElementById('humidity').innerText = humidity + "%";
+        document.getElementById('temp').innerText = temp + "°C";
+        
+        const icon = document.getElementById('cabbage-icon');
+        if(growth > 30) icon.innerText = "🌿";
+        if(growth > 70) icon.innerText = "🥬";
+        if(growth >= 100) {
+            icon.innerText = "🥗";
+            document.getElementById('msg').innerText = "Pronto para colheita!";
+        }
+    }
+
+    function waterCabbage() {
+        if(growth < 100) {
+            humidity = Math.min(humidity + 10, 90);
+            growth = Math.min(growth + 5, 100);
+            document.getElementById('msg').innerText = "Você regou os repolhos!";
+            updateDisplay();
+        }
+    }
+
+    function adjustTemp() {
+        temp = Math.floor(Math.random() * (28 - 18 + 1)) + 18;
+        document.getElementById('msg').innerText = "Temperatura ajustada para o ideal.";
+        updateDisplay();
+    }
+
+    // Simulação de crescimento lento
+    setInterval(() => {
+        if(growth < 100 && growth > 0) {
+            humidity = Math.max(humidity - 1, 30);
+            updateDisplay();
+        }
+    }, 3000);
+
+</script>
+
+</body>
+</html>

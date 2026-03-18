@@ -1,0 +1,137 @@
+/* Configurações de Cores e Fontes */
+:root {
+    --green-dark: #1b4332;
+    --green-medium: #2d6a4f;
+    --green-light: #74c69d;
+    --accent: #d8f3dc;
+    --text-color: #2b2d42;
+    --bg-gradient: linear-gradient(135deg, #f0f4f0 0%, #d8e2dc 100%);
+    --card-bg: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Container Principal */
+.container {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    width: 95%;
+    max-width: 450px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+h1 {
+    color: var(--green-dark);
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+}
+
+/* Área Visual da Planta */
+.greenhouse-visual {
+    font-size: 5rem;
+    margin: 25px 0;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.greenhouse-visual:hover {
+    transform: scale(1.1);
+}
+
+/* Grade de Estatísticas */
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #edf2f4;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--green-medium);
+}
+
+/* Controles */
+.controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+button {
+    flex: 1;
+    background-color: var(--green-medium);
+    color: white;
+    border: none;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: 0 4px 6px rgba(45, 106, 79, 0.2);
+}
+
+button:hover {
+    background-color: var(--green-dark);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Mensagens de Status */
+.status-msg {
+    margin-top: 20px;
+    padding: 10px;
+    background: var(--accent);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--green-dark);
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
